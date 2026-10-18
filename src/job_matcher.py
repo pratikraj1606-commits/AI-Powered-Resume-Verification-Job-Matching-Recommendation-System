@@ -1,3 +1,4 @@
+import json
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -42,7 +43,11 @@ def recommend_jobs(resume_text, resume_skills, jobs):
             job["description"]
         )
 
-        required_skills = extract_skills(job["description"])
+        required_skills = job.get("required_skills")
+
+        if required_skills is None:
+            required_skills = extract_skills(job["description"])
+
         gap = analyze_skill_gap(resume_skills, required_skills)
 
         recommendations.append({
@@ -51,6 +56,7 @@ def recommend_jobs(resume_text, resume_skills, jobs):
             "score": score,
             "matched_skills": gap["matched_skills"],
             "missing_skills": gap["missing_skills"],
+            "application_url": job.get("application_url", ""),
         })
 
     recommendations.sort(
@@ -61,6 +67,23 @@ def recommend_jobs(resume_text, resume_skills, jobs):
     return recommendations
 
 
+def load_jobs(json_path="data/jobs.json"):
+    with open(json_path, "r", encoding="utf-8") as file:
+        jobs = json.load(file)
+
+    if not isinstance(jobs, list):
+        raise ValueError("jobs.json must contain a list of jobs.")
+
+    for job in jobs:
+        for field in ("title", "company", "description"):
+            if not isinstance(job.get(field), str):
+                raise ValueError(
+                    f"Each job must have a valid '{field}' field."
+                )
+
+    return jobs
+
+
 if __name__ == "__main__":
     pdf_path = "data/resume.pdf"
 
@@ -68,32 +91,7 @@ if __name__ == "__main__":
     resume_text = clean_resume_text(raw_text)
     resume_skills = extract_skills(resume_text)
 
-    jobs = [
-        {
-            "title": "Python Developer",
-            "company": "Example Tech A",
-            "description": """
-            Python programming, SQL, Django,
-            REST API development and Git.
-            """
-        },
-        {
-            "title": "Data Analyst",
-            "company": "Example Tech B",
-            "description": """
-            SQL, Excel, Power BI, data analysis
-            and dashboard development.
-            """
-        },
-        {
-            "title": "Machine Learning Intern",
-            "company": "Example Tech C",
-            "description": """
-            Python, SQL, machine learning,
-            data analysis and model evaluation.
-            """
-        },
-    ]
+    jobs = load_jobs()
 
     recommendations = recommend_jobs(
         resume_text,
@@ -110,3 +108,6 @@ if __name__ == "__main__":
         print(f"Text Similarity: {job['score']}%")
         print("Matched Skills:", job["matched_skills"])
         print("Missing Skills:", job["missing_skills"])
+
+        if job["application_url"]:
+            print("Application URL:", job["application_url"])

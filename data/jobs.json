@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Python Developer Intern",
+    "company": "Demo Company A",
+    "description": "Python programming, SQL, Django, REST API development, Git and debugging.",
+    "required_skills": ["Python", "SQL", "Django", "REST API", "Git"],
+    "application_url": ""
+  },
+  {
+    "title": "Data Analyst Intern",
+    "company": "Demo Company B",
+    "description": "SQL, Excel, Power BI, data analysis, data visualization and dashboard development.",
+    "required_skills": ["SQL", "Excel", "Power BI", "Data Analysis"],
+    "application_url": ""
+  },
+  {
+    "title": "Machine Learning Intern",
+    "company": "Demo Company C",
+    "description": "Python, SQL, machine learning, pandas, scikit-learn and model evaluation.",
+    "required_skills": ["Python", "SQL", "Machine Learning", "Pandas", "Scikit-learn"],
+    "application_url": ""
+  },
+  {
+    "title": "Junior SQL Developer",
+    "company": "Demo Company D",
+    "description": "SQL queries, database design, MySQL, joins, data validation and database management.",
+    "required_skills": ["SQL", "MySQL", "Database Design", "Joins"],
+    "application_url": ""
+  },
+  {
+    "title": "Business Intelligence Intern",
+    "company": "Demo Company E",
+    "description": "Power BI, Excel, SQL, reporting, data visualization and business dashboards.",
+    "required_skills": ["Power BI", "Excel", "SQL", "Reporting", "Data Visualization"],
+    "application_url": ""
+  }
+]

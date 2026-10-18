@@ -1,10 +1,10 @@
-
 import streamlit as st
 
-from src.resume_parser import clean_resume_text, extract_skills
-from src.job_matcher import recommend_jobs
-
 from pypdf import PdfReader
+
+from src.resume_parser import clean_resume_text, extract_skills
+from src.job_matcher import recommend_jobs, load_jobs
+
 
 st.set_page_config(
     page_title="AI Resume Matcher",
@@ -15,32 +15,17 @@ st.set_page_config(
 st.title("AI-Powered Resume Verification & Job Matching")
 st.write("Upload your PDF resume to find matching jobs.")
 
-jobs = [
-    {
-        "title": "Python Developer",
-        "company": "Example Tech A",
-        "description": """
-        Python programming, SQL, Django,
-        REST API development and Git.
-        """,
-    },
-    {
-        "title": "Data Analyst",
-        "company": "Example Tech B",
-        "description": """
-        SQL, Excel, Power BI, data analysis
-        and dashboard development.
-        """,
-    },
-    {
-        "title": "Machine Learning Intern",
-        "company": "Example Tech C",
-        "description": """
-        Python, SQL, machine learning,
-        data analysis and model evaluation.
-        """,
-    },
-]
+# Load jobs from the JSON dataset
+try:
+    jobs = load_jobs()
+except (OSError, ValueError) as error:
+    st.error(f"Could not load the job dataset: {error}")
+    st.stop()
+except Exception as error:
+    st.error(f"Unexpected error loading jobs: {error}")
+    st.stop()
+
+st.caption(f"Jobs available in dataset: {len(jobs)}")
 
 uploaded_file = st.file_uploader(
     "Upload your resume (PDF)",
@@ -48,50 +33,80 @@ uploaded_file = st.file_uploader(
 )
 
 if uploaded_file is not None:
-    reader = PdfReader(uploaded_file)
-    raw_text = ""
+    try:
+        reader = PdfReader(uploaded_file)
+        raw_text = ""
 
-    for page in reader.pages:
-        page_text = page.extract_text()
-        if page_text:
-            raw_text += page_text + "\n"
+        for page in reader.pages:
+            page_text = page.extract_text()
+            if page_text:
+                raw_text += page_text + "\n"
 
-    if not raw_text.strip():
-        st.warning("Readable text nahi mila. PDF check karo.")
-    else:
-        resume_text = clean_resume_text(raw_text)
-        resume_skills = extract_skills(resume_text)
+        if not raw_text.strip():
+            st.warning(
+                "Readable text nahi mila. "
+                "PDF check karo; scanned PDFs ke liye OCR ki zarurat ho sakti hai."
+            )
+        else:
+            resume_text = clean_resume_text(raw_text)
+            resume_skills = extract_skills(resume_text)
 
-        st.subheader("Extracted Skills")
-        st.write(", ".join(resume_skills) or "No supported skills found.")
+            st.subheader("Extracted Skills")
+            st.write(
+                ", ".join(resume_skills)
+                or "No supported skills found."
+            )
 
-        recommendations = recommend_jobs(
-            resume_text,
-            resume_skills,
-            jobs,
-        )
+            recommendations = recommend_jobs(
+                resume_text,
+                resume_skills,
+                jobs,
+            )
 
-        st.subheader("Ranked Job Recommendations")
-        st.caption(
-            "Similarity score text overlap dikhata hai, "
-            "hiring probability nahi."
-        )
+            st.subheader("Ranked Job Recommendations")
+            st.caption(
+                "Similarity score text similarity dikhata hai, "
+                "hiring probability nahi."
+            )
 
-        for rank, job in enumerate(recommendations, start=1):
-            with st.expander(
-                f"#{rank} {job['title']} — {job['score']}% similarity"
-            ):
-                st.write("**Company:**", job["company"])
-                st.write(
-                    "**Matched skills:**",
-                    ", ".join(job["matched_skills"]) or "None detected",
-                )
-                st.write(
-                    "**Missing skills:**",
-                    ", ".join(job["missing_skills"]) or "None detected",
-                )
+            if not recommendations:
+                st.info("Dataset mein abhi koi job available nahi hai.")
 
-        st.info(
-            "Abhi ye demo ke liye sample jobs hain, "
-            "real vacancies nahi."
-        )
+            for rank, job in enumerate(recommendations, start=1):
+                with st.expander(
+                    f"#{rank} {job['title']} — "
+                    f"{job['score']}% similarity"
+                ):
+                    st.write("**Company:**", job["company"])
+
+                    st.write(
+                        "**Matched skills:**",
+                        ", ".join(job["matched_skills"])
+                        or "None detected",
+                    )
+
+                    st.write(
+                        "**Missing skills:**",
+                        ", ".join(job["missing_skills"])
+                        or "None detected",
+                    )
+
+                    application_url = job.get("application_url", "")
+
+                    if application_url:
+                        st.link_button(
+                            "Open application page",
+                            application_url,
+                        )
+                    else:
+                        st.caption(
+                            "Application link abhi add nahi kiya gaya hai."
+                        )
+
+            st.info(
+                "Ye sample dataset hai, real vacancies nahi. "
+                "Application links ko use karne se pehle verify karna zaroori hai."
+            )
+
+    except Exception as error:
+        st.error(f"Resume process karte waqt error aaya: {error}")

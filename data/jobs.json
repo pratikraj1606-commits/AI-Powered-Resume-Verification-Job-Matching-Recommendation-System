@@ -1,37 +1,145 @@
 [
   {
     "title": "Python Developer Intern",
-    "company": "Demo Company A",
-    "description": "Python programming, SQL, Django, REST API development, Git and debugging.",
-    "required_skills": ["Python", "SQL", "Django", "REST API", "Git"],
+    "company": "Sample Employer A",
+    "description": "Entry level Python development, programming fundamentals, debugging, Git, REST APIs and software testing.",
+    "required_skills": ["Python", "Git", "REST API", "Debugging"],
+    "experience_level": "Internship",
+    "location": "India",
+    "work_mode": "Remote",
+    "employment_type": "Internship",
+    "application_url": ""
+  },
+  {
+    "title": "Backend Developer Intern",
+    "company": "Sample Employer B",
+    "description": "Backend development using Python, Django, SQL databases, REST API development, testing and Git.",
+    "required_skills": ["Python", "Django", "SQL", "REST API", "Git"],
+    "experience_level": "Internship",
+    "location": "India",
+    "work_mode": "Hybrid",
+    "employment_type": "Internship",
     "application_url": ""
   },
   {
     "title": "Data Analyst Intern",
-    "company": "Demo Company B",
-    "description": "SQL, Excel, Power BI, data analysis, data visualization and dashboard development.",
+    "company": "Sample Employer C",
+    "description": "Data analysis, SQL queries, Excel, Power BI, data cleaning, visualization and reporting.",
     "required_skills": ["SQL", "Excel", "Power BI", "Data Analysis"],
-    "application_url": ""
-  },
-  {
-    "title": "Machine Learning Intern",
-    "company": "Demo Company C",
-    "description": "Python, SQL, machine learning, pandas, scikit-learn and model evaluation.",
-    "required_skills": ["Python", "SQL", "Machine Learning", "Pandas", "Scikit-learn"],
+    "experience_level": "Internship",
+    "location": "India",
+    "work_mode": "Hybrid",
+    "employment_type": "Internship",
     "application_url": ""
   },
   {
     "title": "Junior SQL Developer",
-    "company": "Demo Company D",
-    "description": "SQL queries, database design, MySQL, joins, data validation and database management.",
-    "required_skills": ["SQL", "MySQL", "Database Design", "Joins"],
+    "company": "Sample Employer D",
+    "description": "SQL development, MySQL, database design, joins, query optimization and data validation.",
+    "required_skills": ["SQL", "MySQL", "Database Design", "Query Optimization"],
+    "experience_level": "Entry Level",
+    "location": "India",
+    "work_mode": "On-site",
+    "employment_type": "Full-time",
+    "application_url": ""
+  },
+  {
+    "title": "Machine Learning Intern",
+    "company": "Sample Employer E",
+    "description": "Python, machine learning, pandas, scikit-learn, feature engineering and model evaluation.",
+    "required_skills": ["Python", "Machine Learning", "Pandas", "Scikit-learn"],
+    "experience_level": "Internship",
+    "location": "India",
+    "work_mode": "Remote",
+    "employment_type": "Internship",
     "application_url": ""
   },
   {
     "title": "Business Intelligence Intern",
-    "company": "Demo Company E",
-    "description": "Power BI, Excel, SQL, reporting, data visualization and business dashboards.",
+    "company": "Sample Employer F",
+    "description": "Business intelligence, Power BI dashboards, Excel, SQL, reporting and data visualization.",
     "required_skills": ["Power BI", "Excel", "SQL", "Reporting", "Data Visualization"],
+    "experience_level": "Internship",
+    "location": "India",
+    "work_mode": "Hybrid",
+    "employment_type": "Internship",
+    "application_url": ""
+  },
+  {
+    "title": "Data Science Intern",
+    "company": "Sample Employer G",
+    "description": "Python programming, statistics, pandas, SQL, exploratory data analysis and machine learning.",
+    "required_skills": ["Python", "Pandas", "SQL", "Statistics", "Machine Learning"],
+    "experience_level": "Internship",
+    "location": "India",
+    "work_mode": "Remote",
+    "employment_type": "Internship",
+    "application_url": ""
+  },
+  {
+    "title": "Software Testing Intern",
+    "company": "Sample Employer H",
+    "description": "Software testing, test cases, bug reporting, Python scripting, debugging and quality assurance.",
+    "required_skills": ["Software Testing", "Python", "Debugging", "Test Cases"],
+    "experience_level": "Internship",
+    "location": "India",
+    "work_mode": "On-site",
+    "employment_type": "Internship",
+    "application_url": ""
+  },
+  {
+    "title": "Frontend Developer Intern",
+    "company": "Sample Employer I",
+    "description": "Frontend development using HTML, CSS, JavaScript, responsive design, Git and browser debugging.",
+    "required_skills": ["HTML", "CSS", "JavaScript", "Git"],
+    "experience_level": "Internship",
+    "location": "India",
+    "work_mode": "Hybrid",
+    "employment_type": "Internship",
+    "application_url": ""
+  },
+  {
+    "title": "Data Reporting Intern",
+    "company": "Sample Employer J",
+    "description": "Excel reporting, SQL queries, data cleaning, dashboard preparation and business data analysis.",
+    "required_skills": ["Excel", "SQL", "Reporting", "Data Analysis"],
+    "experience_level": "Internship",
+    "location": "India",
+    "work_mode": "Remote",
+    "employment_type": "Internship",
+    "application_url": ""
+  },
+  {
+    "title": "MERN Stack Developer Intern",
+    "company": "Sample Employer K",
+    "description": "Full stack web development using MongoDB, Express.js, React.js and Node.js. Build REST APIs, integrate frontend and backend, use Git and GitHub, implement CRUD operations and create responsive web applications.",
+    "required_skills": ["React", "Node.js", "Express.js", "MongoDB", "REST API", "Git"],
+    "experience_level": "Internship",
+    "location": "India",
+    "work_mode": "Remote",
+    "employment_type": "Internship",
+    "application_url": ""
+  },
+  {
+    "title": "React Frontend Developer Intern",
+    "company": "Sample Employer L",
+    "description": "Frontend development using React.js, JavaScript, HTML5, CSS3, Tailwind CSS and Bootstrap. Build responsive user interfaces, integrate APIs and use Git for version control.",
+    "required_skills": ["React", "JavaScript", "HTML", "CSS", "Tailwind CSS", "Git"],
+    "experience_level": "Internship",
+    "location": "India",
+    "work_mode": "Hybrid",
+    "employment_type": "Internship",
+    "application_url": ""
+  },
+  {
+    "title": "Node.js Backend Developer Intern",
+    "company": "Sample Employer M",
+    "description": "Backend development using Node.js, Express.js, MongoDB, Mongoose and REST APIs. Implement JWT authentication, CRUD operations, API integration and database management.",
+    "required_skills": ["Node.js", "Express.js", "MongoDB", "REST API", "JWT Authentication", "Mongoose"],
+    "experience_level": "Internship",
+    "location": "India",
+    "work_mode": "Remote",
+    "employment_type": "Internship",
     "application_url": ""
   }
 ]

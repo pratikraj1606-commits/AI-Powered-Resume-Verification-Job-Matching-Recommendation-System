@@ -95,9 +95,9 @@ def verify_resume_text(text):
     # Check explicit year ranges such as 2022-2024 or 2024 to 2022.
     # This is a basic consistency check, not proof of misconduct.
     year_range_pattern = (
-        r"\b((?:19|20)\d{2})\s*"
-        r"(?:-|–|—|\bto\b)\s*"
-        r"((?:19|20)\d{2}|present|current)\b"
+    r"\b((?:19|20)\d{2})\s*"
+    r"(?:[-–—]|\bto\b)\s*"
+    r"((?:19|20)\d{2}|present|current)\b"
     )
 
     reversed_ranges = []

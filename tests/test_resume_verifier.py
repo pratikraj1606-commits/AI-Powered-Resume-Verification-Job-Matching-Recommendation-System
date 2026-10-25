@@ -107,3 +107,54 @@ def test_present_end_date_is_not_flagged():
         for signal in result["review_signals"]
     )
 
+
+def test_reversed_year_range_with_en_dash_is_flagged():
+    text = (
+        "Email: john@example.com Phone: +91 9876543210\n"
+        "Education\nBTech Electronics Engineering\n"
+        "Experience\nDeveloper role from 2024–2022\n"
+        "Skills\nPython SQL Excel\n"
+        + "Developed and tested software applications. " * 6
+    )
+
+    result = verify_resume_text(text)
+
+    assert any(
+        "reverse order" in signal
+        for signal in result["review_signals"]
+    )
+
+
+def test_reversed_year_range_with_em_dash_is_flagged():
+    text = (
+        "Email: john@example.com Phone: +91 9876543210\n"
+        "Education\nBTech Electronics Engineering\n"
+        "Experience\nDeveloper role from 2024—2022\n"
+        "Skills\nPython SQL Excel\n"
+        + "Developed and tested software applications. " * 6
+    )
+
+    result = verify_resume_text(text)
+
+    assert any(
+        "reverse order" in signal
+        for signal in result["review_signals"]
+    )
+
+def test_reversed_year_range_with_en_dash_is_flagged():
+    text = (
+        "Email: john@example.com Phone: +91 9876543210\n"
+        "Education\nBTech Electronics Engineering\n"
+        "Experience\nDeveloper role from 2024–2022\n"
+        "Skills\nPython SQL Excel\n"
+        + "Developed and tested software applications. " * 6
+    )
+
+    result = verify_resume_text(text)
+
+    assert any(
+        "reverse order" in signal
+        for signal in result["review_signals"]
+    )
+
+

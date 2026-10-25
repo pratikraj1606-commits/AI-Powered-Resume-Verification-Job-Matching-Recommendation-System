@@ -75,3 +75,63 @@ def test_skill_coverage_normalizes_aliases():
         resume_skills,
         required_skills,
     ) == 100.0
+
+    
+def test_recommend_jobs_rejects_non_dictionary_job():
+    import pytest
+
+    with pytest.raises(ValueError, match="Each job must be a dictionary"):
+        recommend_jobs(
+            "Python developer",
+            ["python"],
+            ["invalid job record"],
+        )
+
+
+def test_recommend_jobs_rejects_invalid_required_skills():
+    import pytest
+
+    jobs = [
+        {
+            "title": "Python Developer",
+            "company": "Company A",
+            "description": "Python development",
+            "required_skills": "python",
+        }
+    ]
+
+    with pytest.raises(
+        ValueError,
+        match="'required_skills' must be a list",
+    ):
+        recommend_jobs("Python developer", ["python"], jobs)
+
+
+def test_recommend_jobs_returns_application_details():
+    jobs = [
+        {
+            "title": "Python Developer",
+            "company": "Company A",
+            "description": "Python development",
+            "required_skills": ["python"],
+            "application_url": "https://example.com/jobs/python",
+            "experience_level": "Intern",
+            "location": "India",
+            "work_mode": "Remote",
+            "employment_type": "Internship",
+        }
+    ]
+
+    results = recommend_jobs(
+        "Python developer",
+        ["python"],
+        jobs,
+    )
+
+    assert len(results) == 1
+    assert results[0]["application_url"] == (
+        "https://example.com/jobs/python"
+    )
+    assert results[0]["experience_level"] == "Intern"
+    assert results[0]["work_mode"] == "Remote"
+

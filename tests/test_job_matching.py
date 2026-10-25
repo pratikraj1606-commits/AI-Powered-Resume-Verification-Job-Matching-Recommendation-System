@@ -135,3 +135,20 @@ def test_recommend_jobs_returns_application_details():
     assert results[0]["experience_level"] == "Intern"
     assert results[0]["work_mode"] == "Remote"
 
+
+def test_duplicate_skills_do_not_inflate_coverage():
+    resume_skills = ["Python", "Python", "SQL"]
+    required_skills = ["python", "python", "sql"]
+
+    assert calculate_skill_coverage(
+        resume_skills,
+        required_skills,
+    ) == 100.0
+
+
+def test_empty_required_skills_return_zero_coverage():
+    assert calculate_skill_coverage(
+        ["python", "sql"],
+        [],
+    ) == 0.0
+
